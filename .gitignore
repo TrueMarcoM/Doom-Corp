@@ -1,0 +1,19 @@
+# Java compiled files
+*.class
+
+# Java build folders
+bin/
+out/
+target/
+build/
+
+# Node dependencies
+node_modules/
+
+# Environment variables
+.env
+
+# OS/editor files
+.DS_Store
+.vscode/
+.idea/
