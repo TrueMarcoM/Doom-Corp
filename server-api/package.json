@@ -2,14 +2,14 @@
   "name": "doom-corp-server-api",
   "version": "1.0.0",
   "description": "Doom Corp backend API server",
-  "license": "ISC",
+  "license": "MIT",
   "author": "TrueMarcoM",
   "type": "commonjs",
   "main": "server.js",
   "scripts": {
     "dev": "nodemon server.js",
     "start": "node server.js"
-  }
+  },
   "dependencies": { 
     "bcrypt": "^6.0.0",
     "cors": "^2.8.6",

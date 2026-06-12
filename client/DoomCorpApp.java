@@ -4,14 +4,18 @@
 //Confirm with official documentation later
 
 import java.io.*;
-import java.util.Scanner;
-import java.net.URI; //this is used for the address of the API endpoint. Its how we'll store the destination url? //a string isnt enough?
-import java.net.http.HttpClient; //this is used to represent the object that actually sends the request. We are going to make a HTTP client object. (our app?)
-import java.net.http.HttpRequest; //this is used for the app (client) to send HTTP requests to the server.
-import java.net.http.HttpResponse; //this is used for the app (client) to store the HTTP responses from the server.
+import java.net.URI;
+import java.net.http.HttpClient; //this is used for the address of the API endpoint. Its how we'll store the destination url? //a string isnt enough?
+import java.net.http.HttpRequest; //this is used to represent the object that actually sends the request. We are going to make a HTTP client object. (our app?)
+import java.net.http.HttpResponse; //this is used for the app (client) to send HTTP requests to the server.
+import java.util.Scanner; //this is used for the app (client) to store the HTTP responses from the server.
+
+//[=] Review "throws" keyword.
+//[=] Review throw/catch exceptions
+
 
 public class DoomCorpApp {
-    static final String API_BASE_URL = "http://localhost:3000";
+    static final String API_BASE_URL = "http://localhost:3000"; //The base URL of the server (no path yet)
 
     public static void main(String[] args) throws IOException, InterruptedException {
         displayTitle();
@@ -19,7 +23,7 @@ public class DoomCorpApp {
     }
 
     static void displayTitle() throws IOException {
-        File inputFile = new File("DoomCorpTitleASCII.txt");
+        File inputFile = new File("./assets/DoomCorpTitleASCII.txt");
         Scanner inputFileScanner = new Scanner(inputFile);
 
         while (inputFileScanner.hasNextLine()) {
@@ -30,7 +34,7 @@ public class DoomCorpApp {
         inputFileScanner.close();
     }
 
-    static void displayMenu() { //this is the authentication menu
+    static void displayMenu() throws IOException, InterruptedException { //this is the authentication menu
         Scanner keyboardScanner = new Scanner(System.in);
         System.out.println("1] Login");
         System.out.println("2] Create Account");
@@ -68,10 +72,11 @@ public class DoomCorpApp {
         //I imagine that's one way requests work, you have to provide something along with the request (credentials).
         //Then you may get the response you want. 
         //Atm, I have stored client information?
+        System.out.println("username and password fields updated. No validation at the moment.");
         
     }
 
-    static void createAccount() {
+    static void createAccount() throws IOException, InterruptedException {
         //Normally these type of functions return feedback to the user.
 
 
@@ -121,19 +126,24 @@ public class DoomCorpApp {
         """.formatted(username, password);
 
         //Review these classes/objects.
-        
+        //This code builds an HTTP request. It does not send it yet.
         HttpClient client = HttpClient.newHttpClient();
 
-        HttpRequest request = HttpRequest.newBuilder()
-            .uri(URI.create(API_BASE_URL + "/create-account"))
-            .header("Content-Type", "application/json")
-            .POST(HttpRequest.BodyPublishers.ofString(json))
-            .build();
+        HttpRequest request = HttpRequest.newBuilder() //newBuilder returns 
+            .uri(URI.create(API_BASE_URL + "/create-account")) //this is the URL/path we're going to make the request to. Destination.
+            .header("Content-Type", "application/json") //We're setting the Content-Type field from the header to application/json value. Recall packets have headers. 
+                                                        //However, why applications/json, why not just JSON?
+                                                        //So this is the type (content) of the data we will send.
+            .POST(HttpRequest.BodyPublishers.ofString(json))//This means we're settling on a POST request. We're going to be attach the json string we made into the request body.
+                                                        //Briefly review different types of requests.
+            .build();                                   //This finalizes the request building.
 
-        HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
-
-        System.out.println("Server response: " + response.body());
+        HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString()); //[=] Review generic types. Review Object class
+                                                    //client.send() can throw an IOException.
+        System.out.println("Server response: " + response.body()); //body() returns the body. (In this case, the body of the response).
     
+
+        //client.send() is the one that actually sends the request. send() returns the response.
     }
 }
 
