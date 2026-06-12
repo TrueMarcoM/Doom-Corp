@@ -19,7 +19,7 @@ const pool = require("./db"); //Loading in the db module which is found at this 
 
 const app = express(); //app variable is assigned the return value of the express function (app, which is a function).
                        //Eventually at some point, app function gets added properties that we can use.
-const PORT = 3000;
+const PORT = process.env.PORT || 3000;
 
 app.use(express.json()); //-- review use and json functions
 
