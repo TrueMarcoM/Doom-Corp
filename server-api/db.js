@@ -5,7 +5,8 @@ const mysql = require("mysql2/promise"); //we're specifically loading in the pro
 
 
 const pool = mysql.createPool({
-  host: process.env.DB_HOST,
+  // host: process.env.DB_HOST,
+  socketPath: process.env.INSTANCE_UNIX_SOCKET,
   port: Number(process.env.DB_PORT),
   user: process.env.DB_USER,
   password: process.env.DB_PASSWORD,

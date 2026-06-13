@@ -16,7 +16,7 @@ import java.util.Scanner; //this is used for the app (client) to store the HTTP 
 
 public class DoomCorpApp {
     // static final String API_BASE_URL = "http://localhost:3000"; //The base URL of the server (no path yet)
-    static final String API_BASE_URL = "https://doomcorp-1074518043351.us-west2.run.app/";
+    static final String API_BASE_URL = "https://doomcorp-1074518043351.us-west2.run.app";
 
     public static void main(String[] args) throws IOException, InterruptedException {
         displayTitle();
