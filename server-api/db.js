@@ -5,16 +5,21 @@ const mysql = require("mysql2/promise"); //we're specifically loading in the pro
 
 
 const pool = mysql.createPool({
-  // host: process.env.DB_HOST,
-  socketPath: process.env.INSTANCE_UNIX_SOCKET,
-  port: Number(process.env.DB_PORT),
+  host: process.env.DB_HOST,
+  port: process.env.DB_PORT,
   user: process.env.DB_USER,
   password: process.env.DB_PASSWORD,
   database: process.env.DB_NAME,
   waitForConnections: true,
   connectionLimit: 10,
-  queueLimit: 0
+  queueLimit: 0,
+  ssl: {
+    rejectUnauthorized: false 
+  }
 });
+
+
+
 
 module.exports = pool; //means this module object (which refers to this module) will export whatever it is set to. Which is the pool variable, which is a function call.
                        //it is initializing the exports field to pool.
