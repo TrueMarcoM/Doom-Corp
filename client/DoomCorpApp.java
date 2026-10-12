@@ -41,7 +41,7 @@ public class DoomCorpApp {
         Scanner keyboardScanner = new Scanner(System.in);
         System.out.println("1] Login");
         System.out.println("2] Create Account");
-        System.out.println("3] Exit");
+        System.out.println("3] Exit\n");
 
         int userChoice = keyboardScanner.nextInt();
         //When do I close the scanner?
@@ -65,17 +65,17 @@ public class DoomCorpApp {
 
     static void login() {
         System.out.println("LOGIN");
-        System.out.println("Username: ");
+        System.out.print("Username: ");
         Scanner keyboardScanner = new Scanner(System.in);
         String username = keyboardScanner.nextLine();
-        System.out.println("Password: ");
+        System.out.print("Password: ");
         String password = keyboardScanner.nextLine();
         //User entered username and password are stored in variables. We're going to send these values to the server in some way.
         //I believe we're going to make an HTTP request which includes these credentials.
         //I imagine that's one way requests work, you have to provide something along with the request (credentials).
         //Then you may get the response you want. 
         //Atm, I have stored client information?
-        System.out.println("username and password fields updated. No validation at the moment.");
+        System.out.println("[Username and password fields updated. No validation at the moment.]");
         
     }
 
@@ -102,11 +102,11 @@ public class DoomCorpApp {
 
         System.out.println("CREATE ACCOUNT");
 
-        System.out.println("Username: ");
+        System.out.print("Username: ");
         Scanner keyboardScanner = new Scanner(System.in);
         String username = keyboardScanner.nextLine();
 
-        System.out.println("Password: ");
+        System.out.print("Password: ");
         String password = keyboardScanner.nextLine();
 
 
@@ -143,7 +143,7 @@ public class DoomCorpApp {
 
         HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString()); //[=] Review generic types. Review Object class
                                                     //client.send() can throw an IOException.
-        System.out.println("Server response: " + response.body()); //body() returns the body. (In this case, the body of the response).
+        System.out.println("[Server response: " + response.body() + "]"); //body() returns the body. (In this case, the body of the response).
     
 
         //client.send() is the one that actually sends the request. send() returns the response.

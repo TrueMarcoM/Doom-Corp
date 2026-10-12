@@ -1,23 +1,3 @@
-//Server code, uses a bunch of HTTP requests right?
-//client/server communication?
-
-//this is code that will be on the server. So im giving the server instructions on what to give exactly?
-
-
-//TODO:
-/* Setup te google cloud server for which will be the web api?*/
-
-//Fully understand each object/methods purpose.
-
-//[=] Review await, try, async vs sync
-
-
-//[=] Review difference between accessing functions from object vs from reference variable.
-
-//[=] Review exact concerns with unhashed passwords being sent to database (DB credentials not leaked)
-
-//Need the package/module for encrypting/hashing passwords
-//Need the package/module for rate limiting (prevent request spam)
 const { rateLimit } = require("express-rate-limit") //object destructuring, so it seems the module returns an object. 
                                                     // In other examples, the modules were returning functions, etc.
 const bcrypt = require("bcrypt"); //for hashing passwords
